@@ -1,12 +1,9 @@
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by marti on 26/03/2017.
-  */
-
-/**
+  *
   * IrisClassification is a simple example of Classification using Apache Spark's machine learning pipeline
   */
 
@@ -14,21 +11,23 @@ object IrisClassification extends DataLoader{
 
   /**
     * Only expects a single arg
-    * arg(0) should have the path to the iris data
+    * args(0) should have the path to the iris data train
+    * args(1) should have the path to the iris data test
     */
 
   def main(args: Array[String]): Unit = {
 
-    //val conf = new SparkConf(true).setAppName("iris").setMaster("local[*]")
-    //val sc = new SparkContext(conf)
     val spark = SparkSession.builder.master("local").appName("iris").getOrCreate()
 
-    val training = loadIris(args(0), spark)
-    val testing = loadIris(args(1), spark)
+    val train = args(0)
+    val test = args(1)
+
+    val training = loadIris(train, spark)
+    val testing = loadIris(test, spark)
 
     // Keep features and y
-    training.select("features", "y")
-    testing.select("features", "y")
+    training.select("features", "y").show(20)
+    testing.select("features", "y").show(20)
 
     // print the result
     print("Training schema: ")

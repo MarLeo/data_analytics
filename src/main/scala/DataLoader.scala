@@ -5,12 +5,23 @@ import org.apache.spark.sql.types.{FloatType, Metadata, StructField, StructType}
 /**
   * Created by marti on 25/03/2017.
   */
+
+/**
+  * Load iris data.
+  *
+  * The iris data is a collection of data collected by R.A. Fisher. It has measurements of various iris flowers
+  * and is widely used for beginner statistics and machine-learning problems.
+  *
+  * The data is a CSV with no header. It is in the format:
+  * sepal length in cm, sepal width in cm, petal length in cm, petal width in cm, iris type
+  *
+  * Example:
+  * 5.1,3.5,1.4,0.2,Iris-setosa
+  *
+  * @return a Dataframe with two columns. `irisFeatureColumn` contains the feature `Vector`s and `irisTypeColumn` contains the `String` iris types
+  */
+
 trait DataLoader {
-
-
-def featuresCol = "X"
-def labelCol = "y"
-
 
 def loadIris(filePath: String, spark: SparkSession): DataFrame = {
     val schema = new StructType()
