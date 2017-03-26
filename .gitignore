@@ -832,3 +832,6 @@ project/plugins/project/
 
 /project/
 /id_rsa_user65
+/.idea/
+/src/test/
+/target/
